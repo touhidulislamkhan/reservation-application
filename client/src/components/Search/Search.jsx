@@ -9,8 +9,10 @@ import React, { useState } from 'react';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
+import { useNavigate } from 'react-router-dom';
 import './search.css';
 const Search = () => {
+	const [destination, setDestination] = useState('');
 	const [openDate, setOpenDate] = useState(false);
 	const [date, setDate] = useState([
 		{
@@ -26,11 +28,17 @@ const Search = () => {
 	});
 	const [openOptions, setOpenOptions] = useState(false);
 
+	const navigate = useNavigate();
+
 	const handleOptions = (name, operation) => {
 		setOptions({
 			...options,
 			[name]: operation === 'i' ? options[name] + 1 : options[name] - 1,
 		});
+	};
+
+	const handleSearch = () => {
+		navigate('/hotels', { state: { destination, date, options } });
 	};
 
 	return (
@@ -41,6 +49,7 @@ const Search = () => {
 					type="text"
 					placeholder="Where are you going?"
 					className="searchInput"
+					onChange={(e) => setDestination(e.target.value)}
 				/>
 			</div>
 			<div className="searchItem">
@@ -59,6 +68,7 @@ const Search = () => {
 						moveRangeOnFirstSelection={false}
 						ranges={date}
 						className="date"
+						minDate={new Date()}
 					/>
 				)}
 			</div>
@@ -136,7 +146,9 @@ const Search = () => {
 				)}
 			</div>
 			<div className="searchItem">
-				<button className="searchBtn">Search</button>
+				<button className="searchBtn" onClick={handleSearch}>
+					Search
+				</button>
 			</div>
 		</div>
 	);
