@@ -106,7 +106,7 @@ const Hotel = () => {
 								<img
 									onClick={() => handleSlider(i)}
 									src={photo.src}
-									alt=""
+									alt="Room Images"
 									className="hotelImg"
 								/>
 							</div>

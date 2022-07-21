@@ -15,7 +15,7 @@
 }
 
 .icon {
-	color: lightgray;
+	color: gray;
 }
 
 .searchItem {
@@ -30,7 +30,7 @@
 }
 
 .searchText {
-	color: lightgray;
+	color: gray;
 	cursor: pointer;
 }
 
